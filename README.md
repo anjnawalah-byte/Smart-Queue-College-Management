@@ -1,1 +1,0 @@
-# Smart-Queue-College-Management
