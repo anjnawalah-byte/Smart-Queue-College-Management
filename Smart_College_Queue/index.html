@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart College Queue Management System — Student Portal</title>
+    <meta name="description" content="College Administrative Queue Portal: Digital tokens, live queue tracking, estimated wait times, and online document verification.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- 1. Header & Navigation -->
+    <header class="portal-header">
+        <div class="container nav-wrapper">
+            <!-- Brand / Logo -->
+            <div class="brand-section">
+                <div class="brand-logo-icon" aria-label="College Logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                    </svg>
+                </div>
+                <div class="brand-text-block">
+                    <span class="brand-title">College Admin Portal</span>
+                    <span class="brand-subtitle">Smart Queue System</span>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="queue.html" class="nav-link">Live Queue</a></li>
+                    <li><a href="documents.html" class="nav-link">Documents</a></li>
+                    <li><a href="my-tokens.html" class="nav-link">My Tokens</a></li>
+                    <li>
+                        <a href="notifications.html" class="nav-link">
+                            Notifications
+                            <span class="nav-badge-pill unread-count-badge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Mobile Profile Link (Visible on small screens) -->
+                <a href="profile.html" class="student-chip mobile-student-chip" style="display: none;">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Namasvi Patel</span>
+                        <span class="student-id display-student-id">SCQ-2024-8842</span>
+                    </div>
+                </a>
+            </nav>
+
+            <!-- Desktop Student Profile Chip -->
+            <div class="user-menu-wrapper">
+                <a href="profile.html" class="student-chip" title="View Student Profile">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Namasvi Patel</span>
+                        <span class="student-id display-student-id">21CS042</span>
+                    </div>
+                </a>
+                <button class="btn btn-secondary btn-sm" data-action-logout style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4); font-size: 0.8rem; padding: 0.35rem 0.65rem;" title="Sign Out">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Main Content Area -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Welcome Section (Light Blue Banner matching design sketch) -->
+            <section class="welcome-banner" aria-labelledby="welcomeHeading">
+                <div class="welcome-content">
+                    <h1 class="welcome-title" id="welcomeHeading">Welcome, <span class="display-student-name">Namasvi</span>!</h1>
+                    <p class="welcome-subtitle">
+                        Avoid standing in long administrative lines. Select an administrative service below to generate your digital queue token, track wait times in real time, or submit documents for digital verification.
+                    </p>
+                </div>
+                <div class="welcome-action">
+                    <button class="btn btn-primary btn-lg" data-open-token-modal id="btnGenerateTokenHero">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Generate Digital Token
+                    </button>
+                </div>
+            </section>
+
+            <!-- Active Token Alert Banner (Visible if student currently has active token) -->
+            <section id="dashboardActiveTokenBanner" class="active-token-banner" style="display: none;">
+                <div class="active-token-info">
+                    <div class="token-circle-badge">
+                        <span class="token-circle-label">Token</span>
+                        <span class="token-circle-num" id="dashTokenNum">#27</span>
+                    </div>
+                    <div class="active-token-details">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                            <span class="status-pill status-waiting" id="dashTokenStatusPill">● Waiting</span>
+                            <span style="font-size: 0.8rem; color: #64748b;" id="dashTokenServiceLocation">Admin Block G-08</span>
+                        </div>
+                        <h3 id="dashTokenServiceName">Document Verification Queue</h3>
+                        <div class="active-token-stats">
+                            <span>Serving: <strong id="dashServingNum">#21</strong></span>
+                            <span>People Ahead: <strong id="dashPeopleAhead">6</strong></span>
+                            <span>Est. Wait: <strong id="dashWaitTime">~24 mins</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="active-token-actions" style="display: flex; gap: 0.5rem;">
+                    <a href="queue.html" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Track Live Queue
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section Title -->
+            <div class="section-header-row">
+                <div>
+                    <h2 class="section-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        Administrative Services
+                    </h2>
+                    <p class="section-subtitle">Select a service counter to view live queue conditions or request a token</p>
+                </div>
+                <a href="services.html" class="btn btn-secondary btn-sm">View All Services Details →</a>
+            </div>
+
+            <!-- 4 Service Cards Grid (Matching the attached concept sketch) -->
+            <div class="services-grid" id="servicesGridContainer">
+                
+                <!-- 1. Fees Card -->
+                <div class="service-card" data-service-id="fees">
+                    <div class="service-card-top">
+                        <div class="service-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">Fees</h3>
+                        <p class="service-card-desc">Pay fees and view receipts.</p>
+                        <div class="service-meta-info">
+                            <span>Counter 1 & 2</span>
+                            <span id="feesQueueCount">Serving: #F-21</span>
+                        </div>
+                    </div>
+                    <div class="service-card-action">
+                        <button class="btn btn-primary btn-block btn-sm" data-open-token-modal data-service-id="fees">
+                            Get Token
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Exam Card -->
+                <div class="service-card" data-service-id="exam">
+                    <div class="service-card-top">
+                        <div class="service-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">Exam</h3>
+                        <p class="service-card-desc">Hall tickets, results, and exam-related requests.</p>
+                        <div class="service-meta-info">
+                            <span>Counter 3</span>
+                            <span id="examQueueCount">Serving: #E-14</span>
+                        </div>
+                    </div>
+                    <div class="service-card-action">
+                        <button class="btn btn-primary btn-block btn-sm" data-open-token-modal data-service-id="exam">
+                            Get Token
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Documents Card -->
+                <div class="service-card" data-service-id="documents">
+                    <!-- Active badge indicator -->
+                    <span class="active-token-badge" id="docActiveBadge" style="display: none;">
+                        <span>●</span> Active Token
+                    </span>
+                    <div class="service-card-top">
+                        <div class="service-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <path d="M9 15l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">Documents</h3>
+                        <p class="service-card-desc">Certificates, transcripts, bonafide certificates, and other documents.</p>
+                        <div class="service-meta-info">
+                            <span>Counter 4 & 5</span>
+                            <span id="docQueueCount">Serving: #D-21</span>
+                        </div>
+                    </div>
+                    <div class="service-card-action" style="display: flex; gap: 0.4rem;">
+                        <button class="btn btn-primary btn-sm" style="flex: 1;" data-open-token-modal data-service-id="documents">
+                            Get Token
+                        </button>
+                        <a href="documents.html" class="btn btn-secondary btn-sm" title="Upload and verify documents">
+                            Verify
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Scholarship Card -->
+                <div class="service-card" data-service-id="scholarship">
+                    <div class="service-card-top">
+                        <div class="service-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="7"></circle>
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">Scholarship</h3>
+                        <p class="service-card-desc">Scholarship applications and status tracking.</p>
+                        <div class="service-meta-info">
+                            <span>Counter 6</span>
+                            <span id="scholarshipQueueCount">Serving: #S-08</span>
+                        </div>
+                    </div>
+                    <div class="service-card-action">
+                        <button class="btn btn-primary btn-block btn-sm" data-open-token-modal data-service-id="scholarship">
+                            Get Token
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Quick Access Document Checklist Banner -->
+            <div style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="width: 44px; height: 44px; border-radius: 8px; background-color: #eff6ff; color: #1d4ed8; display: flex; align-items: center; justify-content: center;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.05rem; font-weight: 700; color: #0d233a; margin-bottom: 0.2rem;">Document Verification Workflow</h4>
+                        <p style="font-size: 0.85rem; color: #64748b;">Submit required certificates, track review statuses, and re-upload rejected files before visiting counter.</p>
+                    </div>
+                </div>
+                <div>
+                    <a href="documents.html" class="btn btn-secondary">
+                        Open Document Checklist & Uploads →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 3. Digital Token Generation Modal -->
+    <div class="modal-overlay" id="tokenModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Generate Digital Queue Token</h3>
+                <button class="modal-close-btn" data-close-token-modal aria-label="Close modal">✕</button>
+            </div>
+            <form id="tokenGenerateForm">
+                <div class="modal-body">
+                    <!-- Error / Notice Alert inside modal -->
+                    <div id="modalAlertBox" style="display: none; padding: 0.75rem 1rem; border-radius: 6px; background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+                    <div class="form-group">
+                        <label for="modalServiceSelect" class="form-label">Select Administrative Service *</label>
+                        <select id="modalServiceSelect" class="form-select" required>
+                            <option value="">-- Choose a Service Counter --</option>
+                        </select>
+                        <span class="form-hint">Each service counter has an independent digital queue.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalCategoryInput" class="form-label">Purpose / Sub-Category</label>
+                        <select id="modalCategoryInput" class="form-select">
+                            <option value="General Inquiry">General Inquiry / Token</option>
+                            <option value="Bonafide Certificate">Bonafide Certificate Request</option>
+                            <option value="Semester Fee Receipt">Semester Fee Receipt Collection</option>
+                            <option value="Duplicate Hall Ticket">Duplicate Hall Ticket / Exam Admit</option>
+                            <option value="Marksheet Attestation">Marksheet Attestation & Verification</option>
+                            <option value="Scholarship Verification">Scholarship Physical Verification</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalNoteInput" class="form-label">Additional Note (Optional)</label>
+                        <textarea id="modalNoteInput" class="form-textarea" rows="2" placeholder="e.g. Need urgent sign for loan application"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-close-token-modal>Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btnConfirmGenerateToken">
+                        Generate Token Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Portal Footer -->
+    <footer class="portal-footer">
+        <div class="container footer-inner">
+            <div class="footer-copy">
+                <strong>Smart College Queue Management System</strong> &copy; 2024. College Administration Office.
+            </div>
+            <div class="footer-links">
+                <a href="services.html">Services</a>
+                <a href="queue.html">Live Tracking</a>
+                <a href="documents.html">Document Portal</a>
+                <a href="profile.html">Student Profile</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Dashboard specific active token display logic
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDashboardTokenBanner();
+            updateDashboardServiceCards();
+        });
+
+        function updateDashboardServiceCards() {
+            const services = SCQStorage.getServices();
+            services.forEach(s => {
+                const countEl = document.getElementById(`${s.id}QueueCount`);
+                if (countEl) {
+                    if (s.isPaused) {
+                        countEl.textContent = 'Paused';
+                    } else if (s.currentServingNumber > 0) {
+                        countEl.textContent = `Serving: #${s.code}-${s.currentServingNumber}`;
+                    } else {
+                        countEl.textContent = 'Desk Ready';
+                    }
+                }
+            });
+        }
+
+        function updateDashboardTokenBanner() {
+            const student = SCQStorage.getStudent();
+            const activeTokens = SCQStorage.getActiveTokens().filter(t => t.studentId === student?.id);
+            const banner = document.getElementById('dashboardActiveTokenBanner');
+            const docBadge = document.getElementById('docActiveBadge');
+
+            if (activeTokens.length > 0) {
+                const token = activeTokens[0];
+                const pos = SCQStorage.calculateQueuePosition(token);
+
+                if (banner) {
+                    banner.style.display = 'flex';
+                    document.getElementById('dashTokenNum').textContent = `#${token.tokenCode}`;
+                    document.getElementById('dashTokenServiceName').textContent = `${token.serviceName} Queue`;
+                    document.getElementById('dashTokenServiceLocation').textContent = token.serviceLocation;
+                    document.getElementById('dashServingNum').textContent = `#${pos.servingCode}`;
+                    document.getElementById('dashPeopleAhead').textContent = pos.peopleAhead;
+                    document.getElementById('dashWaitTime').textContent = pos.waitDurationFormatted;
+
+                    const pill = document.getElementById('dashTokenStatusPill');
+                    if (pill) {
+                        pill.textContent = `● ${token.status}`;
+                        pill.className = `status-pill ${token.status === 'Almost Your Turn' ? 'status-almost' : (token.status === 'Being Served' ? 'status-serving' : 'status-waiting')}`;
+                    }
+                }
+
+                if (token.serviceId === 'documents' && docBadge) {
+                    docBadge.style.display = 'inline-flex';
+                }
+            } else {
+                if (banner) banner.style.display = 'none';
+                if (docBadge) docBadge.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

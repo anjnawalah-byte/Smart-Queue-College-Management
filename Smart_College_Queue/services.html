@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrative Services — Smart College Queue</title>
+    <meta name="description" content="College administrative services catalog: fees, exam cell, document verification, and scholarship counters with live queue conditions.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="portal-header">
+        <div class="container nav-wrapper">
+            <div class="brand-section">
+                <div class="brand-logo-icon" aria-label="College Logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                    </svg>
+                </div>
+                <div class="brand-text-block">
+                    <span class="brand-title">College Admin Portal</span>
+                    <span class="brand-subtitle">Smart Queue System</span>
+                </div>
+            </div>
+
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link active">Services</a></li>
+                    <li><a href="queue.html" class="nav-link">Live Queue</a></li>
+                    <li><a href="documents.html" class="nav-link">Documents</a></li>
+                    <li><a href="my-tokens.html" class="nav-link">My Tokens</a></li>
+                    <li>
+                        <a href="notifications.html" class="nav-link">
+                            Notifications
+                            <span class="nav-badge-pill unread-count-badge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <a href="profile.html" class="student-chip mobile-student-chip" style="display: none;">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Namasvi Patel</span>
+                        <span class="student-id display-student-id">SCQ-2024-8842</span>
+                    </div>
+                </a>
+            </nav>
+
+            <div class="user-menu-wrapper">
+                <a href="profile.html" class="student-chip" title="View Student Profile">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Namasvi Patel</span>
+                        <span class="student-id display-student-id">21CS042</span>
+                    </div>
+                </a>
+                <button class="btn btn-secondary btn-sm" data-action-logout style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4); font-size: 0.8rem; padding: 0.35rem 0.65rem;" title="Sign Out">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <div class="section-header-row">
+                <div>
+                    <h1 class="section-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        Administrative Service Counters
+                    </h1>
+                    <p class="section-subtitle">
+                        View real-time counter status, operating hours, desk locations, and generate tokens directly.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Detailed Services List -->
+            <div id="servicesDetailedContainer" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">
+                
+                <!-- 1. Fees Department -->
+                <div class="service-card" style="padding: 1.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; gap: 1.25rem; align-items: center;">
+                            <div class="service-icon-box" style="margin-bottom: 0;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 style="font-size: 1.25rem; font-weight: 700; color: #0d233a;">Fees Department</h2>
+                                <span style="font-size: 0.85rem; color: #64748b;">Admin Block, Ground Floor - Counter 1 & 2 • Hours: 09:30 AM - 04:30 PM</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" data-open-token-modal data-service-id="fees">
+                                Generate Fees Token
+                            </button>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.925rem; color: #475569; margin-bottom: 1.25rem;">
+                        Pay semester tuition fees, hostel and mess charges, bus transport passes, laboratory fees, and collect physical computer-generated fee receipts.
+                    </p>
+
+                    <div class="queue-metrics-grid" style="margin-bottom: 0;">
+                        <div class="metric-card">
+                            <div class="metric-label">Currently Calling</div>
+                            <div class="metric-val" id="servFeesServing">#F-21</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Waiting in Queue</div>
+                            <div class="metric-val">8 Students</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Average Wait Time</div>
+                            <div class="metric-val">~4 mins / person</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Examination Cell -->
+                <div class="service-card" style="padding: 1.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; gap: 1.25rem; align-items: center;">
+                            <div class="service-icon-box" style="margin-bottom: 0;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 style="font-size: 1.25rem; font-weight: 700; color: #0d233a;">Examination Cell</h2>
+                                <span style="font-size: 0.85rem; color: #64748b;">Admin Block, Ground Floor - Counter 3 • Hours: 10:00 AM - 04:00 PM</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" data-open-token-modal data-service-id="exam">
+                                Generate Exam Token
+                            </button>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.925rem; color: #475569; margin-bottom: 1.25rem;">
+                        Hall ticket distribution, semester grade card collection, revaluation forms, paper scrutiny requests, and backlog exam registration assistance.
+                    </p>
+
+                    <div class="queue-metrics-grid" style="margin-bottom: 0;">
+                        <div class="metric-card">
+                            <div class="metric-label">Currently Calling</div>
+                            <div class="metric-val" id="servExamServing">#E-14</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Waiting in Queue</div>
+                            <div class="metric-val">5 Students</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Average Wait Time</div>
+                            <div class="metric-val">~5 mins / person</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Document Verification -->
+                <div class="service-card" style="padding: 1.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; gap: 1.25rem; align-items: center;">
+                            <div class="service-icon-box" style="margin-bottom: 0;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <path d="M9 15l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <h2 style="font-size: 1.25rem; font-weight: 700; color: #0d233a;">Document Verification & Certificates</h2>
+                                    <span class="active-token-badge" id="docActiveBadgeServices" style="display: none; position: static;">Active Token</span>
+                                </div>
+                                <span style="font-size: 0.85rem; color: #64748b;">Admin Block, Ground Floor - Counter 4 & 5 • Hours: 09:30 AM - 05:00 PM</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" data-open-token-modal data-service-id="documents">
+                                Generate Documents Token
+                            </button>
+                            <a href="documents.html" class="btn btn-secondary">
+                                Submit Documents
+                            </a>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.925rem; color: #475569; margin-bottom: 1.25rem;">
+                        Official bonafide certificate issuance, academic transcripts, transfer and migration certificates, degree attestation, and signature verification.
+                    </p>
+
+                    <div class="queue-metrics-grid" style="margin-bottom: 0;">
+                        <div class="metric-card">
+                            <div class="metric-label">Currently Calling</div>
+                            <div class="metric-val" id="servDocServing">Desk Ready</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Waiting in Queue</div>
+                            <div class="metric-val" id="servDocQueue">0 Students</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Average Wait Time</div>
+                            <div class="metric-val">~4 mins / person</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Scholarship Desk -->
+                <div class="service-card" style="padding: 1.75rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; gap: 1.25rem; align-items: center;">
+                            <div class="service-icon-box" style="margin-bottom: 0;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="8" r="7"></circle>
+                                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 style="font-size: 1.25rem; font-weight: 700; color: #0d233a;">Scholarship & Financial Aid Desk</h2>
+                                <span style="font-size: 0.85rem; color: #64748b;">Admin Block, 1st Floor - Counter 6 • Hours: 10:30 AM - 03:30 PM</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" data-open-token-modal data-service-id="scholarship">
+                                Generate Scholarship Token
+                            </button>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.925rem; color: #475569; margin-bottom: 1.25rem;">
+                        Post-matric scholarship portal verification, state and central scheme validations, caste and income proof verification, and trust endowment processing.
+                    </p>
+
+                    <div class="queue-metrics-grid" style="margin-bottom: 0;">
+                        <div class="metric-card">
+                            <div class="metric-label">Currently Calling</div>
+                            <div class="metric-val" id="servScholarshipServing">#S-08</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Waiting in Queue</div>
+                            <div class="metric-val">4 Students</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Average Wait Time</div>
+                            <div class="metric-val">~6 mins / person</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Digital Token Generation Modal (Shared) -->
+    <div class="modal-overlay" id="tokenModal" role="dialog" aria-modal="true" aria-labelledby="modalGenTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalGenTitle">Generate Digital Queue Token</h3>
+                <button class="modal-close-btn" data-close-token-modal aria-label="Close modal">✕</button>
+            </div>
+            <form id="tokenGenerateForm">
+                <div class="modal-body">
+                    <div id="modalAlertBox" style="display: none; padding: 0.75rem 1rem; border-radius: 6px; background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+                    <div class="form-group">
+                        <label for="modalServiceSelect" class="form-label">Select Administrative Service *</label>
+                        <select id="modalServiceSelect" class="form-select" required>
+                            <option value="">-- Choose a Service Counter --</option>
+                        </select>
+                        <span class="form-hint">Each service counter has an independent digital queue.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalCategoryInput" class="form-label">Purpose / Sub-Category</label>
+                        <select id="modalCategoryInput" class="form-select">
+                            <option value="General Inquiry">General Inquiry / Token</option>
+                            <option value="Bonafide Certificate">Bonafide Certificate Request</option>
+                            <option value="Semester Fee Receipt">Semester Fee Receipt Collection</option>
+                            <option value="Duplicate Hall Ticket">Duplicate Hall Ticket / Exam Admit</option>
+                            <option value="Marksheet Attestation">Marksheet Attestation & Verification</option>
+                            <option value="Scholarship Verification">Scholarship Physical Verification</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalNoteInput" class="form-label">Additional Note (Optional)</label>
+                        <textarea id="modalNoteInput" class="form-textarea" rows="2" placeholder="e.g. Need urgent sign for loan application"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-close-token-modal>Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btnConfirmGenerateToken">
+                        Generate Token Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+        <div class="container footer-inner">
+            <div class="footer-copy">
+                <strong>Smart College Queue Management System</strong> &copy; 2024. College Administration Office.
+            </div>
+            <div class="footer-links">
+                <a href="services.html">Services</a>
+                <a href="queue.html">Live Tracking</a>
+                <a href="documents.html">Document Portal</a>
+                <a href="profile.html">Student Profile</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const services = SCQStorage.getServices();
+            const student = SCQStorage.getStudent();
+            const activeTokens = SCQStorage.getActiveTokens();
+
+            services.forEach(s => {
+                const el = document.getElementById(`serv${s.id.charAt(0).toUpperCase() + s.id.slice(1)}Serving`);
+                if (el) {
+                    if (s.isPaused) {
+                        el.textContent = 'Paused';
+                    } else if (s.currentServingNumber > 0) {
+                        el.textContent = `#${s.code}-${s.currentServingNumber}`;
+                    } else {
+                        el.textContent = 'Desk Ready';
+                    }
+                }
+            });
+
+            const docActive = activeTokens.find(t => t.serviceId === 'documents' && t.studentId === student?.id);
+            const badge = document.getElementById('docActiveBadgeServices');
+            if (badge && docActive) {
+                badge.style.display = 'inline-block';
+                badge.textContent = `Active Token (#${docActive.tokenCode})`;
+            }
+        });
+    </script>
+</body>
+</html>

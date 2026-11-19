@@ -1,0 +1,211 @@
+/* ==========================================================================
+   Smart College Queue Management System
+   responsive.css - Responsive Media Queries
+   ========================================================================== */
+
+/* Tablet & Smaller Desktop Viewports (<= 1024px) */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .queue-metrics-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet & Mobile Breakpoint (<= 768px) */
+@media (max-width: 768px) {
+    .portal-header {
+        position: relative;
+    }
+
+    .nav-wrapper {
+        height: auto;
+        padding: 0.85rem 0;
+        flex-wrap: wrap;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-nav {
+        display: none;
+        width: 100%;
+        order: 3;
+        margin-top: 0.85rem;
+        padding-top: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .main-nav.open {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .user-menu-wrapper {
+        display: none; /* In mobile, show inside the drawer */
+    }
+
+    .mobile-student-chip {
+        display: flex !important;
+        margin-top: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-md);
+    }
+
+    /* Welcome Banner */
+    .welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.25rem;
+    }
+
+    .welcome-action {
+        width: 100%;
+    }
+
+    .welcome-action .btn {
+        width: 100%;
+    }
+
+    /* Active Token Banner */
+    .active-token-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .active-token-actions {
+        width: 100%;
+    }
+
+    .active-token-actions .btn {
+        width: 100%;
+    }
+
+    /* Service Cards */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Queue Tracking */
+    .tokens-comparison-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .queue-metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .queue-card-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .queue-card-actions .btn {
+        width: 100%;
+    }
+
+    .queue-card-body {
+        padding: 1.25rem;
+    }
+
+    .queue-card-header {
+        padding: 1rem 1.25rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
+
+    /* Document Summary Stats */
+    .doc-progress-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .doc-stat-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .doc-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .doc-upload-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .doc-upload-controls .btn {
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+/* Extra Small Phones (<= 480px) */
+@media (max-width: 480px) {
+    .brand-title {
+        font-size: 1rem;
+    }
+
+    .welcome-title {
+        font-size: 1.25rem;
+    }
+
+    .token-box-number {
+        font-size: 2.25rem;
+    }
+
+    .metric-val {
+        font-size: 1.25rem;
+    }
+
+    .modal-dialog {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Admin Dashboard Breakpoints */
+@media (max-width: 1024px) {
+    #kpiStatsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    #adminCountersContainer {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 640px) {
+    #kpiStatsGrid {
+        grid-template-columns: 1fr !important;
+    }
+}

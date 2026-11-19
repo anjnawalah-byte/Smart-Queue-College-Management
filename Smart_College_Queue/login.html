@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Sign In & Enrollment — Smart College Queue</title>
+    <meta name="description" content="Sign in or enroll to Smart College Queue Management System. Student enrollment with Password123 or Administrative Officer access.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border: 1px solid var(--color-navy-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background-color: var(--color-navy);
+            color: #ffffff;
+            padding: 2rem 1.75rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--color-primary);
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: #f1f5f9;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .auth-tab-btn {
+            flex: 1;
+            padding: 0.85rem;
+            text-align: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .auth-tab-btn.active {
+            background: #ffffff;
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .auth-body {
+            padding: 1.75rem;
+        }
+
+        .role-hint-pill {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 0.9rem;
+            font-size: 0.825rem;
+            color: #1e40af;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .auth-toggle-link {
+            font-size: 0.825rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimal Header -->
+    <header class="portal-header">
+        <div class="container nav-wrapper" style="justify-content: center;">
+            <div class="brand-section">
+                <div class="brand-logo-icon" aria-label="College Logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                    </svg>
+                </div>
+                <div class="brand-text-block">
+                    <span class="brand-title">College Admin Portal</span>
+                    <span class="brand-subtitle">Smart Queue System</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <h1 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.25rem;">Portal Authentication</h1>
+                <p style="font-size: 0.85rem; color: #93c5fd;">Sign in to access digital tokens or counter operations</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tabBtnStudent" onclick="switchAuthTab('student')">
+                    🎓 Student Access
+                </button>
+                <button type="button" class="auth-tab-btn" id="tabBtnAdmin" onclick="switchAuthTab('admin')">
+                    ⚙️ College Admin
+                </button>
+            </div>
+
+            <div class="auth-body">
+                <!-- Alert box for errors -->
+                <div id="authAlertBox" style="display: none; padding: 0.75rem 1rem; border-radius: 6px; background-color: #fee2e2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+                <!-- 1. STUDENT LOGIN FORM -->
+                <div id="studentAuthPane">
+                    <!-- Sign In Mode -->
+                    <form id="formStudentLogin" onsubmit="handleStudentLoginSubmit(event)">
+                        <div class="form-group">
+                            <label for="studentEnrollmentInput" class="form-label">Enrollment Number</label>
+                            <input type="text" id="studentEnrollmentInput" class="form-input" placeholder="e.g. 21CS042" required style="text-transform: uppercase;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentPasswordInput" class="form-label">Password</label>
+                            <input type="password" id="studentPasswordInput" class="form-input" placeholder="Enter your password" required>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Sign In as Student
+                            </button>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: #64748b;">
+                            New student? <button type="button" class="auth-toggle-link" onclick="toggleStudentEnrollMode(true)">Enroll with your details</button>
+                        </div>
+                    </form>
+
+                    <!-- Enrollment (Register) Mode -->
+                    <form id="formStudentEnroll" style="display: none;" onsubmit="handleStudentEnrollSubmit(event)">
+                        <div class="form-group">
+                            <label for="enrollNameInput" class="form-label">Full Name *</label>
+                            <input type="text" id="enrollNameInput" class="form-input" placeholder="e.g. Namasvi Patel" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enrollNoInput" class="form-label">Enrollment Number *</label>
+                            <input type="text" id="enrollNoInput" class="form-input" placeholder="e.g. 21CS099" required style="text-transform: uppercase;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enrollDeptSelect" class="form-label">Department *</label>
+                            <select id="enrollDeptSelect" class="form-select">
+                                <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                                <option value="Electronics & Communication">Electronics & Communication</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Information Technology">Information Technology</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enrollPasswordInput" class="form-label">Password *</label>
+                            <input type="password" id="enrollPasswordInput" class="form-input" placeholder="Set your password" required>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Complete Student Enrollment
+                            </button>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: #64748b;">
+                            Already enrolled? <button type="button" class="auth-toggle-link" onclick="toggleStudentEnrollMode(false)">Back to Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 2. ADMIN LOGIN FORM -->
+                <div id="adminAuthPane" style="display: none;">
+                    <form id="formAdminLogin" onsubmit="handleAdminLoginSubmit(event)">
+                        <div class="form-group">
+                            <label for="adminUsernameInput" class="form-label">Admin Username</label>
+                            <input type="text" id="adminUsernameInput" class="form-input" placeholder="Enter Admin Username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adminPasswordInput" class="form-label">Admin Password</label>
+                            <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter Admin Password" required>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary btn-block" style="background-color: #0d233a; border-color: #0d233a;">
+                                Sign In as Administrator
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="portal-footer">
+        <div class="container footer-inner" style="justify-content: center;">
+            <div class="footer-copy">
+                <strong>Smart College Queue Management System</strong> &copy; 2024. College Administration Office.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script>
+        function switchAuthTab(tab) {
+            const tabBtnStudent = document.getElementById('tabBtnStudent');
+            const tabBtnAdmin = document.getElementById('tabBtnAdmin');
+            const studentPane = document.getElementById('studentAuthPane');
+            const adminPane = document.getElementById('adminAuthPane');
+            const alertBox = document.getElementById('authAlertBox');
+
+            if (alertBox) alertBox.style.display = 'none';
+
+            if (tab === 'student') {
+                tabBtnStudent.classList.add('active');
+                tabBtnAdmin.classList.remove('active');
+                studentPane.style.display = 'block';
+                adminPane.style.display = 'none';
+            } else {
+                tabBtnAdmin.classList.add('active');
+                tabBtnStudent.classList.remove('active');
+                adminPane.style.display = 'block';
+                studentPane.style.display = 'none';
+            }
+        }
+
+        function toggleStudentEnrollMode(isEnroll) {
+            const loginForm = document.getElementById('formStudentLogin');
+            const enrollForm = document.getElementById('formStudentEnroll');
+            const alertBox = document.getElementById('authAlertBox');
+            if (alertBox) alertBox.style.display = 'none';
+
+            if (isEnroll) {
+                loginForm.style.display = 'none';
+                enrollForm.style.display = 'block';
+            } else {
+                enrollForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        }
+
+        function showAuthError(msg) {
+            const alertBox = document.getElementById('authAlertBox');
+            if (alertBox) {
+                alertBox.textContent = msg;
+                alertBox.style.display = 'block';
+            } else {
+                alert(msg);
+            }
+        }
+
+        function handleStudentLoginSubmit(e) {
+            e.preventDefault();
+            const enrollmentNo = document.getElementById('studentEnrollmentInput').value;
+            const password = document.getElementById('studentPasswordInput').value;
+
+            try {
+                const student = SCQStorage.loginStudent(enrollmentNo, password);
+                window.location.href = 'index.html';
+            } catch (err) {
+                showAuthError(err.message);
+            }
+        }
+
+        function handleStudentEnrollSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('enrollNameInput').value;
+            const enrollmentNo = document.getElementById('enrollNoInput').value;
+            const department = document.getElementById('enrollDeptSelect').value;
+            const password = document.getElementById('enrollPasswordInput').value;
+
+            try {
+                const student = SCQStorage.enrollStudent({
+                    name: name,
+                    enrollmentNo: enrollmentNo,
+                    department: department,
+                    password: password
+                });
+                alert(`Student enrollment successful for ${student.name} (${student.enrollmentNo})!`);
+                window.location.href = 'index.html';
+            } catch (err) {
+                showAuthError(err.message);
+            }
+        }
+
+        function handleAdminLoginSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsernameInput').value;
+            const password = document.getElementById('adminPasswordInput').value;
+
+            try {
+                SCQStorage.loginAdmin(username, password);
+                window.location.href = 'admin.html';
+            } catch (err) {
+                showAuthError(err.message);
+            }
+        }
+    </script>
+</body>
+</html>

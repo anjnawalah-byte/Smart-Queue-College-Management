@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile — Smart College Queue</title>
+    <meta name="description" content="Student identity card, academic details, and queue account settings for Smart College Queue.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="portal-header">
+        <div class="container nav-wrapper">
+            <div class="brand-section">
+                <div class="brand-logo-icon" aria-label="College Logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+                    </svg>
+                </div>
+                <div class="brand-text-block">
+                    <span class="brand-title">College Admin Portal</span>
+                    <span class="brand-subtitle">Smart Queue System</span>
+                </div>
+            </div>
+
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="queue.html" class="nav-link">Live Queue</a></li>
+                    <li><a href="documents.html" class="nav-link">Documents</a></li>
+                    <li><a href="my-tokens.html" class="nav-link">My Tokens</a></li>
+                    <li>
+                        <a href="notifications.html" class="nav-link">
+                            Notifications
+                            <span class="nav-badge-pill unread-count-badge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <a href="profile.html" class="student-chip mobile-student-chip" style="display: none;">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Namasvi Patel</span>
+                        <span class="student-id display-student-id">SCQ-2024-8842</span>
+                    </div>
+                </a>
+            </nav>
+
+            <div class="user-menu-wrapper">
+                <a href="profile.html" class="student-chip active" title="View Student Profile" style="background-color: var(--color-primary);">
+                    <span class="student-avatar display-student-avatar">NP</span>
+                    <div class="student-meta">
+                        <span class="student-name display-student-name">Student</span>
+                        <span class="student-id display-student-id">...</span>
+                    </div>
+                </a>
+                <button class="btn btn-secondary btn-sm" data-action-logout style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: rgba(239, 68, 68, 0.4); font-size: 0.8rem; padding: 0.35rem 0.65rem;" title="Sign out of current account">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container" style="max-width: 860px;">
+
+            <div class="section-header-row">
+                <div>
+                    <h1 class="section-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Student Profile & Identification
+                    </h1>
+                    <p class="section-subtitle">
+                        Registered student details for queue tracking and administrative token authentication.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Profile Overview Card (Student Digital ID Card Design) -->
+            <div style="background-color: #ffffff; border: 1px solid var(--color-navy-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; margin-bottom: 2rem;">
+                <div style="background: linear-gradient(135deg, #0d233a 0%, #1e3a8a 100%); color: #ffffff; padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div id="profileAvatarBadge" style="width: 74px; height: 74px; border-radius: 50%; background-color: #3b82f6; border: 3px solid #ffffff; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 800; box-shadow: var(--shadow-md);">
+                            ST
+                        </div>
+                        <div>
+                            <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: #93c5fd; font-weight: 700;">Student ID Card</span>
+                            <h2 id="profileFullName" style="font-size: 1.6rem; font-weight: 700; color: #ffffff; line-height: 1.2;">Student Name</h2>
+                            <p id="profileDept" style="font-size: 0.95rem; color: #cbd5e1;">B.Tech — Computer Science & Engineering</p>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.75rem 1.25rem; border-radius: 8px; text-align: right;">
+                        <span style="font-size: 0.7rem; color: #93c5fd; text-transform: uppercase; font-weight: 700; display: block;">Enrollment / Registration No</span>
+                        <strong id="profileRegNo" style="font-size: 1.15rem; color: #ffffff; letter-spacing: 0.05em;">SCQ-ENROLL</strong>
+                    </div>
+                </div>
+
+                <div style="padding: 1.75rem;">
+                    <!-- Academic Details Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-bottom: 1.75rem;">
+                        <div>
+                            <span style="font-size: 0.8rem; color: #64748b; display: block;">College Enrollment Number</span>
+                            <strong id="profileRollNo" style="font-size: 0.95rem; color: #0d233a;">--</strong>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8rem; color: #64748b; display: block;">Institutional Email</span>
+                            <strong id="profileEmail" style="font-size: 0.95rem; color: #0d233a;">--</strong>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8rem; color: #64748b; display: block;">Registered Mobile Number</span>
+                            <strong id="profilePhone" style="font-size: 0.95rem; color: #0d233a;">--</strong>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8rem; color: #64748b; display: block;">Academic Year / Semester</span>
+                            <strong id="profileAcademicYear" style="font-size: 0.95rem; color: #0d233a;">Current Session</strong>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Summary -->
+                    <div class="queue-metrics-grid" style="margin-bottom: 1.5rem;">
+                        <div class="metric-card">
+                            <div class="metric-label">Active Tokens</div>
+                            <div class="metric-val" id="profileActiveTokensCount">0</div>
+                        </div>
+                        <div class="metric-card highlight-green">
+                            <div class="metric-label">Verified Documents</div>
+                            <div class="metric-val" id="profileVerifiedDocsCount">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Completed Visits</div>
+                            <div class="metric-val" id="profileCompletedVisitsCount">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <a href="queue.html" class="btn btn-primary btn-sm">
+                            View Live Queue Position
+                        </a>
+                        <a href="documents.html" class="btn btn-secondary btn-sm">
+                            Manage Uploaded Documents
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developer & Evaluator Demo Controls -->
+            <div style="background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: var(--radius-md); padding: 1.5rem;">
+                <h3 style="font-size: 1rem; font-weight: 700; color: #0d233a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    Evaluation Demo Controls
+                </h3>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">
+                    Reset the entire system data to clean zero state (clears active tokens, counters at 0, documents at Not Submitted).
+                </p>
+                <button class="btn btn-danger btn-sm" id="btnResetDemoData">
+                    ↺ Reset All Data to Clean Zero State
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Digital Token Generation Modal (Shared) -->
+    <div class="modal-overlay" id="tokenModal" role="dialog" aria-modal="true" aria-labelledby="modalGenTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalGenTitle">Generate Digital Queue Token</h3>
+                <button class="modal-close-btn" data-close-token-modal aria-label="Close modal">✕</button>
+            </div>
+            <form id="tokenGenerateForm">
+                <div class="modal-body">
+                    <div id="modalAlertBox" style="display: none; padding: 0.75rem 1rem; border-radius: 6px; background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+                    <div class="form-group">
+                        <label for="modalServiceSelect" class="form-label">Select Administrative Service *</label>
+                        <select id="modalServiceSelect" class="form-select" required>
+                            <option value="">-- Choose a Service Counter --</option>
+                        </select>
+                        <span class="form-hint">Each service counter has an independent digital queue.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalCategoryInput" class="form-label">Purpose / Sub-Category</label>
+                        <select id="modalCategoryInput" class="form-select">
+                            <option value="General Inquiry">General Inquiry / Token</option>
+                            <option value="Bonafide Certificate">Bonafide Certificate Request</option>
+                            <option value="Semester Fee Receipt">Semester Fee Receipt Collection</option>
+                            <option value="Duplicate Hall Ticket">Duplicate Hall Ticket / Exam Admit</option>
+                            <option value="Marksheet Attestation">Marksheet Attestation & Verification</option>
+                            <option value="Scholarship Verification">Scholarship Physical Verification</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalNoteInput" class="form-label">Additional Note (Optional)</label>
+                        <textarea id="modalNoteInput" class="form-textarea" rows="2" placeholder="e.g. Need urgent sign for loan application"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-close-token-modal>Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btnConfirmGenerateToken">
+                        Generate Token Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Portal Footer -->
+    <footer class="portal-footer">
+        <div class="container footer-inner">
+            <div class="footer-copy">
+                <strong>Smart College Queue Management System</strong> &copy; 2024. College Administration Office.
+            </div>
+            <div class="footer-links">
+                <a href="services.html">Services</a>
+                <a href="queue.html">Live Tracking</a>
+                <a href="documents.html">Document Portal</a>
+                <a href="profile.html">Student Profile</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = SCQStorage.getCurrentUser();
+            if (user) {
+                const nameEl = document.getElementById('profileFullName');
+                const deptEl = document.getElementById('profileDept');
+                const regEl = document.getElementById('profileRegNo');
+                const rollEl = document.getElementById('profileRollNo');
+                const emailEl = document.getElementById('profileEmail');
+                const phoneEl = document.getElementById('profilePhone');
+                const yearEl = document.getElementById('profileAcademicYear');
+                const avatarEl = document.getElementById('profileAvatarBadge');
+
+                const displayName = user.name || (user.role === 'admin' ? 'Administrator' : 'Student');
+                if (nameEl) nameEl.textContent = displayName;
+                if (deptEl) deptEl.textContent = user.department ? `${user.department} (Sem ${user.semester || 1})` : (user.role === 'admin' ? 'Administrative Directorate' : 'Undergraduate Engineering');
+                if (regEl) regEl.textContent = user.enrollmentNumber || user.username || 'SCQ-STUDENT';
+                if (rollEl) rollEl.textContent = user.enrollmentNumber || user.username || '--';
+                if (emailEl) emailEl.textContent = user.email || (user.enrollmentNumber ? `${user.enrollmentNumber.toLowerCase()}@college.edu` : 'admin@college.edu');
+                if (phoneEl) phoneEl.textContent = user.phone || '+91 98765 43210';
+                if (yearEl) yearEl.textContent = user.semester ? `Semester ${user.semester} • Academic Year 2024-2025` : 'Academic Year 2024-2025';
+
+                if (avatarEl) {
+                    const initials = displayName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'ST';
+                    avatarEl.textContent = initials;
+                }
+            }
+
+            const activeTokens = SCQStorage.getActiveTokens();
+            const docs = SCQStorage.getDocuments();
+            const verifiedDocs = docs.filter(d => d.status === 'Verified');
+            const allTokens = SCQStorage.getTokens();
+            const completedVisits = allTokens.filter(t => t.status === 'Completed' || t.status === 'Resolved');
+
+            const activeEl = document.getElementById('profileActiveTokensCount');
+            const verifiedEl = document.getElementById('profileVerifiedDocsCount');
+            const completedEl = document.getElementById('profileCompletedVisitsCount');
+
+            if (activeEl) activeEl.textContent = activeTokens.length;
+            if (verifiedEl) verifiedEl.textContent = verifiedDocs.length;
+            if (completedEl) completedEl.textContent = completedVisits.length;
+
+            const resetBtn = document.getElementById('btnResetDemoData');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to reset all data to a clean zero state? All active tokens and queues will be cleared.')) {
+                        SCQStorage.resetAllToDefault();
+                        showToast('System data reset to clean zero state.', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 500);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
